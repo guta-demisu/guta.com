@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guta Demisu Kebede | Mathematician · Researcher · Educator</title>
+  <meta name="description" content="Guta Demisu Kebede — Mathematician, researcher at Dilla University Ethiopia, educational content creator, and STEM advocate. Explore research, publications, and the Guta Maths Studio." />
+  <meta name="keywords" content="Guta Demisu Kebede, mathematician Ethiopia, Dilla University, mathematics educator, singularly perturbed equations, Guta Maths Studio, GMS_21, numerical methods, STEM Ethiopia" />
+  <meta property="og:title" content="Guta Demisu Kebede | Mathematician · Researcher · Educator" />
+  <meta property="og:description" content="Mathematician, researcher, and digital educator bridging advanced mathematics with accessible learning." />
+  <meta property="og:type" content="website" />
+  <meta name="author" content="Guta Demisu Kebede" />
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Guta Demisu Kebede",
+    "jobTitle": "Lecturer & Researcher in Mathematics",
+    "affiliation": { "@type": "Organization", "name": "Dilla University, Ethiopia" },
+    "sameAs": [
+      "https://www.youtube.com/@GMS_21",
+      "https://www.tiktok.com/@frewon21",
+      "https://orcid.org/0000-0002-1430-7367"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* =====================================================
+       DESIGN TOKENS
+    ===================================================== */
+    :root {
+      --ink:      #0a0d14;
+      --ink2:     #141824;
+      --ink3:     #1e2435;
+      --cream:    #f5f0e8;
+      --gold:     #c9a84c;
+      --gold2:    #e8c97a;
+      --teal:     #2ec4b6;
+      --teal2:    #72e8de;
+      --red:      #e63946;
+      --muted:    #7a8499;
+      --border:   rgba(201,168,76,0.18);
+      --glass:    rgba(20,24,36,0.72);
+      --radius:   12px;
+      --ff-head:  'Playfair Display', Georgia, serif;
+      --ff-body:  'DM Sans', sans-serif;
+      --ff-mono:  'DM Mono', monospace;
+      --ease:     cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* =====================================================
+       RESET & BASE
+    ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--ff-body);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--gold); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================================
+       LOADER
+    ===================================================== */
+    #loader {
+      position: fixed; inset: 0;
+      background: var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-inner {
+      text-align: center;
+    }
+    .loader-symbol {
+      font-family: var(--ff-head);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    .loader-bar {
+      width: 200px; height: 2px;
+      background: var(--ink3);
+      margin: 1.2rem auto 0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .loader-bar::after {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+      border-radius: 2px;
+      animation: loadbar 1.6s ease forwards;
+    }
+    @keyframes loadbar { to { width: 100%; } }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* =====================================================
+       NAV
+    ===================================================== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5%;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(10,13,20,0.92);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-logo {
+      font-family: var(--ff-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s var(--ease);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--cream); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--ink) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; border: none; background: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top: 0; right: -100%;
+      width: min(320px, 100vw); height: 100vh;
+      background: var(--ink2);
+      padding: 5rem 2rem 2rem;
+      border-left: 1px solid var(--border);
+      transition: right 0.4s var(--ease);
+      z-index: 99;
+      flex-direction: column; gap: 1.5rem;
+    }
+    .mobile-menu.open { right: 0; display: flex; }
+    .mobile-menu a {
+      font-family: var(--ff-head);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--cream);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 7rem 5% 4rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-gradient {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(46,196,182,0.07) 0%, transparent 60%),
+                  radial-gradient(ellipse 60% 80% at 20% 80%, rgba(201,168,76,0.06) 0%, transparent 60%),
+                  var(--ink);
+    }
+    /* Animated math grid */
+    .math-grid {
+      position: absolute; inset: 0; opacity: 0.035;
+      background-image:
+        linear-gradient(var(--teal) 1px, transparent 1px),
+        linear-gradient(90deg, var(--teal) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridShift 20s linear infinite;
+    }
+    @keyframes gridShift { to { transform: translateY(60px); } }
+
+    /* Floating math symbols */
+    .float-symbols {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .fs {
+      position: absolute;
+      font-family: var(--ff-head);
+      font-size: 1.2rem;
+      color: var(--gold);
+      opacity: 0;
+      animation: floatUp var(--dur, 12s) var(--delay, 0s) ease-in-out infinite;
+    }
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+      20%  { opacity: 0.15; }
+      80%  { opacity: 0.1; }
+      100% { opacity: 0; transform: translateY(-300px) rotate(30deg); }
+    }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 740px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--ff-mono);
+      font-size: 0.78rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 1.4rem;
+      opacity: 0; transform: translateY(12px);
+      animation: fadeUp 0.7s 0.4s var(--ease) forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 28px; height: 1px; background: var(--teal);
+    }
+    h1.hero-name {
+      font-family: var(--ff-head);
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+      opacity: 0; transform: translateY(14px);
+      animation: fadeUp 0.8s 0.55s var(--ease) forwards;
+    }
+    h1.hero-name em {
+      font-style: normal;
+      background: linear-gradient(120deg, var(--gold), var(--teal2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-typed-wrap {
+      font-family: var(--ff-head);
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      font-weight: 400;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+      min-height: 2.2rem;
+      opacity: 0; transform: translateY(14px);
+      animation: fadeUp 0.8s 0.7s var(--ease) forwards;
+    }
+    .typed-cursor { color: var(--gold); animation: blink 0.9s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+      opacity: 0; transform: translateY(14px);
+      animation: fadeUp 0.8s 0.85s var(--ease) forwards;
+    }
+    .hero-ctas {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      margin-bottom: 3rem;
+      opacity: 0; transform: translateY(14px);
+      animation: fadeUp 0.8s 1s var(--ease) forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #b8860b);
+      color: var(--ink);
+      box-shadow: 0 6px 24px rgba(201,168,76,0.3);
+    }
+    .btn-primary:hover { box-shadow: 0 10px 32px rgba(201,168,76,0.45); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--cream);
+      background: var(--glass);
+      backdrop-filter: blur(8px);
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+
+    .hero-socials {
+      display: flex; gap: 1.2rem;
+      opacity: 0; animation: fadeUp 0.8s 1.15s var(--ease) forwards;
+    }
+    .hero-social {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+    }
+    .hero-social:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    /* Hero right — decorative orb */
+    .hero-orb {
+      position: absolute; right: 5%; top: 50%;
+      transform: translateY(-50%);
+      width: min(480px, 46vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, rgba(46,196,182,0.12), rgba(201,168,76,0.06) 50%, transparent 70%);
+      border: 1px solid rgba(201,168,76,0.08);
+      display: flex; align-items: center; justify-content: center;
+      animation: orbRotate 30s linear infinite;
+      z-index: 0;
+    }
+    .hero-orb::before {
+      content: '';
+      position: absolute;
+      width: 70%; height: 70%;
+      border-radius: 50%;
+      border: 1px dashed rgba(46,196,182,0.15);
+      animation: orbRotate 18s linear infinite reverse;
+    }
+    .orb-center {
+      font-family: var(--ff-head);
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(201,168,76,0.3);
+      user-select: none;
+    }
+    @keyframes orbRotate { to { transform: translateY(-50%) rotate(360deg); } }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =====================================================
+       SECTION SHELL
+    ===================================================== */
+    section { padding: 5rem 5%; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--ff-mono);
+      font-size: 0.72rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+    .section-tag::before {
+      content: '//';
+      color: var(--gold);
+    }
+    h2.section-title {
+      font-family: var(--ff-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    h2.section-title span { color: var(--gold); }
+    .section-lead {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.02rem;
+      margin-bottom: 3.5rem;
+    }
+    .divider {
+      width: 48px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+      border-radius: 2px;
+      margin-bottom: 1.4rem;
+    }
+    /* Alternating bg */
+    .bg-alt { background: var(--ink2); }
+    .bg-alt2 { background: var(--ink3); }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* =====================================================
+       STATS BAR
+    ===================================================== */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 0;
+    }
+    .stat-item {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .stat-item:hover::before { opacity: 1; }
+    .stat-num {
+      font-family: var(--ff-head);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* =====================================================
+       ABOUT
+    ===================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-photo {
+      width: 100%; aspect-ratio: 4/5;
+      background: var(--ink3);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .about-photo-placeholder {
+      font-family: var(--ff-head);
+      font-size: 5rem;
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(201,168,76,0.3);
+    }
+    .about-photo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(10,13,20,0.6));
+    }
+    .about-badge {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--gold);
+      color: var(--ink);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 0.85rem;
+      line-height: 1.3;
+      box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+    }
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      font-size: 1.01rem;
+    }
+    .about-text p strong { color: var(--cream); font-weight: 600; }
+    .about-tags {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin: 1.8rem 0;
+    }
+    .tag {
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--teal);
+      font-family: var(--ff-mono);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tag:hover { border-color: var(--teal); background: rgba(46,196,182,0.06); }
+
+    /* =====================================================
+       SKILLS
+    ===================================================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--ink2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.4);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    }
+    .skill-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      width: 48px; height: 48px;
+      background: rgba(201,168,76,0.08);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .skill-name {
+      font-family: var(--ff-head);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .skill-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .skill-bar-track {
+      height: 3px;
+      background: var(--ink3);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s 0.3s var(--ease);
+    }
+    .skill-card.visible .skill-bar-fill { transform: scaleX(1); }
+    .skill-pct {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      text-align: right;
+    }
+
+    /* =====================================================
+       PUBLICATIONS
+    ===================================================== */
+    .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .pub-card {
+      background: var(--ink2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      transition: border-color 0.3s, transform 0.3s var(--ease);
+    }
+    .pub-card:hover {
+      border-color: rgba(46,196,182,0.35);
+      transform: translateX(4px);
+    }
+    .pub-year {
+      font-family: var(--ff-mono);
+      font-size: 0.8rem;
+      color: var(--teal);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      letter-spacing: 0.1em;
+      user-select: none;
+    }
+    .pub-journal {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .pub-title {
+      font-family: var(--ff-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+    .pub-authors {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+    .pub-desc {
+      font-size: 0.87rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .pub-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem;
+      font-family: var(--ff-mono);
+      color: var(--teal);
+      border: 1px solid rgba(46,196,182,0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .pub-link:hover { background: rgba(46,196,182,0.08); border-color: var(--teal); }
+
+    /* =====================================================
+       YOUTUBE
+    ===================================================== */
+    .yt-hero {
+      background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(46,196,182,0.04));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    .yt-channel-name {
+      font-family: var(--ff-head);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+    .yt-channel-name span { color: var(--gold); }
+    .yt-handle {
+      font-family: var(--ff-mono);
+      font-size: 0.85rem;
+      color: var(--teal);
+      margin-bottom: 1.2rem;
+    }
+    .yt-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.8rem;
+    }
+    .yt-meta {
+      display: flex; gap: 2rem; margin-bottom: 1.8rem;
+    }
+    .yt-m { text-align: center; }
+    .yt-m .num {
+      font-family: var(--ff-head);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .yt-m .lbl { font-size: 0.75rem; color: var(--muted); }
+    .yt-visual {
+      background: var(--ink3);
+      border-radius: 14px;
+      aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .yt-play {
+      width: 70px; height: 70px;
+      background: rgba(201,168,76,0.9);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; color: var(--ink);
+      cursor: pointer;
+      transition: transform 0.3s var(--ease), background 0.2s;
+      box-shadow: 0 0 0 10px rgba(201,168,76,0.15);
+    }
+    .yt-play:hover { transform: scale(1.08); background: var(--gold2); }
+    .yt-visual-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0d1117, #161b27);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .yt-formula {
+      position: absolute;
+      font-family: var(--ff-mono);
+      font-size: 0.8rem;
+      color: rgba(46,196,182,0.2);
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .video-card {
+      background: var(--ink2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s;
+    }
+    .video-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+    .video-thumb {
+      aspect-ratio: 16/9;
+      background: var(--ink3);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .video-thumb-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0d1a2e, #13202f);
+    }
+    .video-thumb-eq {
+      position: relative; z-index: 1;
+      font-family: var(--ff-mono);
+      font-size: 0.9rem;
+      color: rgba(201,168,76,0.5);
+      text-align: center;
+      padding: 1rem;
+    }
+    .video-thumb-play {
+      position: absolute; z-index: 2;
+      width: 46px; height: 46px;
+      background: rgba(201,168,76,0.85);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink); font-size: 1rem;
+      transition: transform 0.3s var(--ease);
+    }
+    .video-card:hover .video-thumb-play { transform: scale(1.1); }
+    .video-info { padding: 1.2rem; }
+    .video-cat {
+      font-family: var(--ff-mono); font-size: 0.68rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 0.4rem;
+    }
+    .video-title {
+      font-family: var(--ff-head); font-size: 0.95rem;
+      font-weight: 700; line-height: 1.35;
+      margin-bottom: 0.6rem;
+    }
+    .video-dur {
+      font-size: 0.78rem; color: var(--muted);
+      font-family: var(--ff-mono);
+    }
+
+    /* =====================================================
+       SOCIAL / TIKTOK
+    ===================================================== */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .social-card {
+      background: var(--ink2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem 1rem;
+      text-align: center;
+      transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .social-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--sc-color, var(--gold));
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .social-card-icon {
+      font-size: 2rem;
+      color: var(--sc-color, var(--gold));
+      margin-bottom: 0.8rem;
+    }
+    .social-card-name {
+      font-family: var(--ff-head);
+      font-weight: 700; font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+    .social-card-handle {
+      font-family: var(--ff-mono);
+      font-size: 0.72rem; color: var(--muted);
+    }
+
+    /* =====================================================
+       ACHIEVEMENTS
+    ===================================================== */
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .achieve-card {
+      background: var(--ink2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      transition: transform 0.3s var(--ease), border-color 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .achieve-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+    }
+    .achieve-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.3);
+    }
+    .achieve-icon {
+      font-size: 1.8rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .achieve-num {
+      font-family: var(--ff-head);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    .achieve-num .suffix { font-size: 1.6rem; color: var(--gold); }
+    .achieve-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* =====================================================
+       MATH INTERACTIVE
+    ===================================================== */
+    .math-showcase {
+      background: var(--ink2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+      position: relative; overflow: hidden;
+    }
+    .math-showcase::before {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(46,196,182,0.08), transparent 70%);
+      top: -100px; right: -100px;
+    }
+    .math-eq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+    .math-eq-card {
+      background: var(--ink3);
+      border: 1px solid rgba(46,196,182,0.1);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.3s, transform 0.3s var(--ease);
+    }
+    .math-eq-card:hover {
+      border-color: rgba(46,196,182,0.4);
+      transform: scale(1.02);
+    }
+    .eq-label {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+    .eq-display {
+      font-family: var(--ff-mono);
+      font-size: 1.05rem;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
+    }
+    .eq-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Floating background equations */
+    .bg-eq {
+      position: absolute;
+      font-family: var(--ff-mono);
+      font-size: 0.85rem;
+      color: rgba(201,168,76,0.06);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* =====================================================
+       VISION / PHILOSOPHY
+    ===================================================== */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .vision-card {
+      background: var(--ink2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.2rem;
+      transition: border-color 0.3s, transform 0.3s var(--ease);
+    }
+    .vision-card:hover {
+      border-color: rgba(201,168,76,0.3);
+      transform: translateY(-3px);
+    }
+    .vision-q {
+      font-family: var(--ff-head);
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 0.5rem;
+    }
+    .vision-text {
+      font-family: var(--ff-head);
+      font-size: 1.1rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .vision-attr {
+      font-size: 0.82rem;
+      color: var(--teal);
+      font-family: var(--ff-mono);
+    }
+
+    /* =====================================================
+       CONTACT
+    ===================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .contact-form {
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: var(--ff-mono);
+    }
+    .form-input {
+      background: var(--ink2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      color: var(--cream);
+      font-family: var(--ff-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--gold); }
+    .form-input::placeholder { color: rgba(122,132,153,0.5); }
+    textarea.form-input { resize: vertical; min-height: 130px; }
+    .form-submit {
+      background: linear-gradient(135deg, var(--gold), #b8860b);
+      color: var(--ink);
+      border: none;
+      border-radius: 40px;
+      padding: 0.9rem 2rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.35); }
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .ci-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .ci-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: rgba(201,168,76,0.08);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 1rem;
+    }
+    .ci-label {
+      font-size: 0.78rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); font-family: var(--ff-mono);
+      margin-bottom: 0.2rem;
+    }
+    .ci-val { font-size: 0.95rem; color: var(--cream); }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-brand {
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    .footer-copy {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .footer-socials {
+      display: flex; gap: 1rem;
+    }
+    .footer-social {
+      width: 34px; height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.8rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .footer-social:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* =====================================================
+       BACK TO TOP
+    ===================================================== */
+    #back-top {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 90;
+      width: 44px; height: 44px;
+      background: var(--gold);
+      color: var(--ink);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: 0; pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s var(--ease);
+      border: none;
+      box-shadow: 0 4px 16px rgba(201,168,76,0.4);
+    }
+    #back-top.show { opacity: 1; pointer-events: all; transform: translateY(0); }
+    #back-top:hover { background: var(--gold2); }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid, .vision-grid, .contact-grid { grid-template-columns: 1fr; }
+      .yt-hero { grid-template-columns: 1fr; }
+      .hero-orb { display: none; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 3.5rem 4%; }
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======================== LOADER ======================== -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-symbol">∑</div>
+    <div class="loader-bar"></div>
+  </div>
+</div>
+
+<!-- ======================== NAV ======================== -->
+<nav id="nav">
+  <div class="nav-logo">G<span>.</span>D<span>.</span>K</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#youtube">Studio</a></li>
+    <li><a href="#achievements">Impact</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mob-link">About</a>
+  <a href="#skills" class="mob-link">Skills</a>
+  <a href="#publications" class="mob-link">Research</a>
+  <a href="#youtube" class="mob-link">Studio</a>
+  <a href="#achievements" class="mob-link">Impact</a>
+  <a href="#contact" class="mob-link">Contact</a>
+</nav>
+
+<!-- ======================== HERO ======================== -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="math-grid"></div>
+    <div class="float-symbols" id="floatSymbols"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Mathematician · Researcher · Educator</div>
+    <h1 class="hero-name">Guta <em>Demisu</em><br>Kebede</h1>
+    <div class="hero-typed-wrap">
+      <span id="typed"></span><span class="typed-cursor">|</span>
+    </div>
+    <p class="hero-desc">
+      Lecturer at Dilla University, Ethiopia. Researcher in numerical methods for singularly perturbed differential equations. Digital mathematics educator and STEM advocate bringing rigorous mathematics to students worldwide.
+    </p>
+    <div class="hero-ctas">
+      <a href="#publications" class="btn btn-primary"><i class="fas fa-book-open"></i> View Research</a>
+      <a href="#youtube" class="btn btn-outline"><i class="fab fa-youtube"></i> Guta Maths Studio</a>
+    </div>
+    <div class="hero-socials">
+      <a class="hero-social" href="https://www.youtube.com/@GMS_21" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      <a class="hero-social" href="https://www.tiktok.com/@frewon21" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a class="hero-social" href="https://orcid.org/0000-0002-1430-7367" target="_blank" title="ORCID"><i class="fas fa-graduation-cap"></i></a>
+      <a class="hero-social" href="mailto:gutademisu82991@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a class="hero-social" href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a class="hero-social" href="#" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+    </div>
+  </div>
+
+  <div class="hero-orb" aria-hidden="true">
+    <div class="orb-center">∫</div>
+  </div>
+</section>
+
+<!-- ======================== STATS BAR ======================== -->
+<div style="padding: 0 5%; background: var(--ink2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="stats-bar">
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="5">0</div>
+      <div class="stat-label">Publications</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.1s">
+      <div class="stat-num" data-target="4">0</div>
+      <div class="stat-label">Journals</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.2s">
+      <div class="stat-num" data-target="8">0</div>
+      <div class="stat-label">Co-Authors</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.3s">
+      <div class="stat-num" data-target="2019">2000</div>
+      <div class="stat-label">Active Since</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== ABOUT ======================== -->
+<section id="about" class="bg-alt">
+  <div class="section-tag">01 · About</div>
+  <h2 class="section-title">Bridging Theory<br>& <span>Understanding</span></h2>
+  <div class="divider"></div>
+
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <div class="about-photo">
+        <div class="about-photo-placeholder">GDK</div>
+      </div>
+      <div class="about-badge">
+        Department of Mathematics<br>Dilla University, Ethiopia
+      </div>
+    </div>
+
+    <div class="about-text reveal" style="transition-delay:0.15s">
+      <p><strong>Guta Demisu Kebede</strong> is a mathematician, lecturer, and researcher at the Department of Mathematics, College of Natural and Computational Sciences, <strong>Dilla University</strong>, Ethiopia. His work sits at the intersection of advanced numerical analysis, differential equations, and accessible mathematics education.</p>
+
+      <p>With a deep commitment to mathematical rigor, Guta has contributed to peer-reviewed research published in leading international journals including <strong>Wiley</strong>, <strong>Frontiers in Applied Mathematics & Statistics</strong>, <strong>BMC Research Notes</strong>, and <strong>Taylor & Francis</strong> — addressing some of the most technically demanding problems in computational mathematics: <strong>singularly perturbed time-delay parabolic problems with two small parameters</strong>.</p>
+
+      <p>Beyond the research lab, Guta is a passionate digital educator. Through his YouTube channel <strong>Guta Maths Studio (@GMS_21)</strong> and TikTok platform <strong>@frewon21</strong>, he translates complex mathematical concepts into engaging content accessible to students across Ethiopia and the broader global community.</p>
+
+      <p>His vision is simple yet transformative: <em>every student deserves access to world-class mathematics education, regardless of geography or background.</em></p>
+
+      <div class="about-tags">
+        <span class="tag">Numerical Analysis</span>
+        <span class="tag">Singularly Perturbed PDEs</span>
+        <span class="tag">Time-Delay Systems</span>
+        <span class="tag">Finite Difference Methods</span>
+        <span class="tag">B-Spline Collocation</span>
+        <span class="tag">STEM Education</span>
+        <span class="tag">Digital Learning</span>
+      </div>
+
+      <a href="https://orcid.org/0000-0002-1430-7367" target="_blank" class="btn btn-outline" style="display:inline-flex;">
+        <i class="fas fa-external-link-alt"></i> ORCID Profile
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== SKILLS ======================== -->
+<section id="skills">
+  <div class="section-tag">02 · Expertise</div>
+  <h2 class="section-title">Skills &amp; <span>Domains</span></h2>
+  <div class="divider"></div>
+  <p class="section-lead">A multidimensional skillset spanning pure research, applied computation, and modern digital education.</p>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">∂</div>
+      <div class="skill-name">Numerical Analysis</div>
+      <div class="skill-desc">Expert in constructing and analyzing numerical schemes for singularly perturbed PDEs with parameter-uniform convergence.</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.96"></div></div>
+      <div class="skill-pct">Expert</div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.08s">
+      <div class="skill-icon">∑</div>
+      <div class="skill-name">Differential Equations</div>
+      <div class="skill-desc">Deep specialization in time-delay parabolic problems with two-parameter perturbations — stability, convergence, error analysis.</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.94"></div></div>
+      <div class="skill-pct">Expert</div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.16s">
+      <div class="skill-icon"><i class="fas fa-chalkboard-teacher" style="font-size:1.1rem;color:var(--gold)"></i></div>
+      <div class="skill-name">Mathematics Teaching</div>
+      <div class="skill-desc">University-level instructor with a student-centered philosophy, making abstract mathematics tangible and empowering.</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.95"></div></div>
+      <div class="skill-pct">Expert</div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.24s">
+      <div class="skill-icon"><i class="fas fa-video" style="font-size:1rem;color:var(--gold)"></i></div>
+      <div class="skill-name">Educational Content Creation</div>
+      <div class="skill-desc">Creator of mathematics video content for YouTube and TikTok, reaching students across Ethiopia and globally.</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div>
+      <div class="skill-pct">Advanced</div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.32s">
+      <div class="skill-icon">∫</div>
+      <div class="skill-name">Applied Mathematics</div>
+      <div class="skill-desc">Modeling physical, biological, and chemical phenomena through mathematical frameworks; bridging theory with real-world applications.</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.91"></div></div>
+      <div class="skill-pct">Expert</div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.4s">
+      <div class="skill-icon"><i class="fas fa-pen-nib" style="font-size:1rem;color:var(--gold)"></i></div>
+      <div class="skill-name">Academic Research & Writing</div>
+      <div class="skill-desc">Published in international peer-reviewed journals; strong track record of rigorous scientific writing and collaborative research.</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.9"></div></div>
+      <div class="skill-pct">Advanced</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== PUBLICATIONS ======================== -->
+<section id="publications" class="bg-alt">
+  <div class="section-tag">03 · Research</div>
+  <h2 class="section-title">Publications &amp; <span>Papers</span></h2>
+  <div class="divider"></div>
+  <p class="section-lead">Peer-reviewed research in computational mathematics, published in leading international journals.</p>
+
+  <div class="pub-list">
+
+    <div class="pub-card reveal">
+      <div class="pub-year">2025</div>
+      <div>
+        <div class="pub-journal">Taylor &amp; Francis · Research in Mathematics</div>
+        <div class="pub-title">A High-Order Numerical Scheme for Singularly Perturbed Parabolic Time Delay Problem with Two Small Parameters</div>
+        <div class="pub-authors">Fasika Wondimu Gelu &amp; Guta Demisu Kebede — Dilla University, Ethiopia</div>
+        <div class="pub-desc">Construction and analysis of a higher-order numerical scheme for a singularly perturbed parabolic time delay problem. Addresses modeling challenges in physical, biological, and chemical systems. Published February 2025.</div>
+        <a class="pub-link" href="https://www.tandfonline.com/doi/full/10.1080/27684830.2025.2463184" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+      </div>
+    </div>
+
+    <div class="pub-card reveal" style="transition-delay:0.08s">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-journal">BMC Research Notes · Springer Nature</div>
+        <div class="pub-title">An Efficient Numerical Approach for Singularly Perturbed Time Delayed Parabolic Problems with Two-Parameters</div>
+        <div class="pub-authors">Imiru T. Daba, Wondewosen G. Melesse, Fasika W. Gelu &amp; Guta Demisu Kebede</div>
+        <div class="pub-desc">Proposes a scheme via implicit Euler and non-standard finite difference method for time and space derivatives, enhanced with Richardson extrapolation. Achieves parameter-uniform convergence of order O((Δt)² + h²). Published 2024 (Open Access).</div>
+        <a class="pub-link" href="https://link.springer.com/article/10.1186/s13104-024-06813-9" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+      </div>
+    </div>
+
+    <div class="pub-card reveal" style="transition-delay:0.16s">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-journal">PMC · PubMed Central</div>
+        <div class="pub-title">An Efficient Numerical Approach for Singularly Perturbed Time Delayed Parabolic Problems with Two-Parameters (PMC)</div>
+        <div class="pub-authors">Imiru T. Daba, Wondewosen G. Melesse, Fasika W. Gelu &amp; Guta Demisu Kebede</div>
+        <div class="pub-desc">Open-access publication. Includes layer behavior analysis presented via graphs, comprehensive error analysis confirming parameter-uniform convergence. Received December 2023, accepted May 2024.</div>
+        <a class="pub-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11157779/" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+      </div>
+    </div>
+
+    <div class="pub-card reveal" style="transition-delay:0.24s">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-journal">Frontiers in Applied Mathematics &amp; Statistics</div>
+        <div class="pub-title">Third-Degree B-Spline Collocation Method for Singularly Perturbed Time Delay Parabolic Problem with Two Parameters</div>
+        <div class="pub-authors">Imiru T. Daba, Wondwosen G. Melesse &amp; Guta Demisu Kebede</div>
+        <div class="pub-desc">Introduces a fitted Crank-Nicolson / B-spline collocation scheme. Numerical experiments demonstrate superior accuracy over existing literature. Achieves (ε−μ)-uniform convergence of order O((Δt)² + ℓ²). Published December 2023.</div>
+        <a class="pub-link" href="https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2023.1260651/full" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+      </div>
+    </div>
+
+    <div class="pub-card reveal" style="transition-delay:0.32s">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-journal">Computational &amp; Mathematical Methods · Wiley</div>
+        <div class="pub-title">A Fitted Numerical Approach for Singularly Perturbed Two-Parameter Parabolic Problem with Time Delay</div>
+        <div class="pub-authors">Imiru T. Daba, Wondwosen G. Melesse &amp; Guta Demisu Kebede</div>
+        <div class="pub-desc">Constructs an implicit Euler + finite difference scheme on uniform step size. Provides first-order parameter-uniform convergent stability and convergence analysis. DOI: 10.1155/2023/6496354. Published October 2023.</div>
+        <a class="pub-link" href="https://onlinelibrary.wiley.com/doi/10.1155/2023/6496354" target="_blank"><i class="fas fa-external-link-alt"></i> View Paper</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======================== YOUTUBE ======================== -->
+<section id="youtube">
+  <div class="section-tag">04 · Digital Studio</div>
+  <h2 class="section-title">Guta Maths <span>Studio</span></h2>
+  <div class="divider"></div>
+  <p class="section-lead">Mathematics education for the digital generation — accessible, engaging, rigorous.</p>
+
+  <div class="yt-hero reveal">
+    <div>
+      <div class="yt-channel-name">Guta Maths <span>Studio</span></div>
+      <div class="yt-handle">@GMS_21 · YouTube</div>
+      <p class="yt-desc">A dedicated mathematics education channel committed to making advanced and foundational mathematics accessible to Ethiopian students and learners worldwide. From calculus to differential equations, every video is crafted to build genuine understanding.</p>
+      <div class="yt-meta">
+        <div class="yt-m"><div class="num">∞</div><div class="lbl">Lessons</div></div>
+        <div class="yt-m"><div class="num">🇪🇹</div><div class="lbl">Based in Ethiopia</div></div>
+        <div class="yt-m"><div class="num">🌍</div><div class="lbl">Global Reach</div></div>
+      </div>
+      <a href="https://www.youtube.com/@GMS_21" target="_blank" class="btn btn-primary">
+        <i class="fab fa-youtube"></i> Visit Channel
+      </a>
+    </div>
+    <div class="yt-visual reveal" style="transition-delay:0.15s">
+      <div class="yt-visual-bg">
+        <span class="yt-formula" style="top:10%;left:10%">∫₀^∞ e^(-x²) dx = √π/2</span>
+        <span class="yt-formula" style="top:30%;right:8%">∂u/∂t = ε∂²u/∂x²</span>
+        <span class="yt-formula" style="bottom:20%;left:8%">lim(h→0) [f(x+h)-f(x)]/h</span>
+        <span class="yt-formula" style="bottom:10%;right:10%">∑ₙ₌₁^∞ 1/n²= π²/6</span>
+      </div>
+      <div class="yt-play"><i class="fas fa-play"></i></div>
+    </div>
+  </div>
+
+  <!-- Video showcase cards -->
+  <div class="video-grid">
+    <div class="video-card reveal">
+      <div class="video-thumb">
+        <div class="video-thumb-bg"></div>
+        <div class="video-thumb-eq">ε∂²u/∂x² − ∂u/∂t = f(x,t)</div>
+        <div class="video-thumb-play"><i class="fas fa-play"></i></div>
+      </div>
+      <div class="video-info">
+        <div class="video-cat">Numerical Methods</div>
+        <div class="video-title">Introduction to Singularly Perturbed Equations</div>
+        <div class="video-dur"><i class="fas fa-clock" style="color:var(--teal)"></i> Mathematics Fundamentals Series</div>
+      </div>
+    </div>
+    <div class="video-card reveal" style="transition-delay:0.1s">
+      <div class="video-thumb">
+        <div class="video-thumb-bg" style="background: linear-gradient(135deg, #0d2018, #132013)"></div>
+        <div class="video-thumb-eq">∫∫_Ω f(x,y) dA</div>
+        <div class="video-thumb-play"><i class="fas fa-play"></i></div>
+      </div>
+      <div class="video-info">
+        <div class="video-cat">Calculus</div>
+        <div class="video-title">Multivariable Calculus — Double Integrals</div>
+        <div class="video-dur"><i class="fas fa-clock" style="color:var(--teal)"></i> Calculus Series</div>
+      </div>
+    </div>
+    <div class="video-card reveal" style="transition-delay:0.2s">
+      <div class="video-thumb">
+        <div class="video-thumb-bg" style="background: linear-gradient(135deg, #1a0d2e, #20132e)"></div>
+        <div class="video-thumb-eq">u''(x) + p(x)u'(x) = f(x)</div>
+        <div class="video-thumb-play"><i class="fas fa-play"></i></div>
+      </div>
+      <div class="video-info">
+        <div class="video-cat">Differential Equations</div>
+        <div class="video-title">Boundary Value Problems — Step by Step</div>
+        <div class="video-dur"><i class="fas fa-clock" style="color:var(--teal)"></i> ODEs Series</div>
+      </div>
+    </div>
+    <div class="video-card reveal" style="transition-delay:0.3s">
+      <div class="video-thumb">
+        <div class="video-thumb-bg" style="background: linear-gradient(135deg, #1a1a0d, #25200a)"></div>
+        <div class="video-thumb-eq">Ax = b → x = A⁻¹b</div>
+        <div class="video-thumb-play"><i class="fas fa-play"></i></div>
+      </div>
+      <div class="video-info">
+        <div class="video-cat">Linear Algebra</div>
+        <div class="video-title">Systems of Equations & Matrix Methods</div>
+        <div class="video-dur"><i class="fas fa-clock" style="color:var(--teal)"></i> Linear Algebra Series</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== SOCIAL MEDIA ======================== -->
+<section id="social" class="bg-alt">
+  <div class="section-tag">05 · Social</div>
+  <h2 class="section-title">Connect &amp; <span>Follow</span></h2>
+  <div class="divider"></div>
+  <p class="section-lead">Short-form mathematics content, study tips, and educational insights across platforms.</p>
+
+  <div style="background: var(--ink3); border: 1px solid var(--border); border-radius: 16px; padding: 2rem 2.5rem; margin-bottom: 2.5rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap;" class="reveal">
+    <div style="font-size:3rem; color:#69C9D0;"><i class="fab fa-tiktok"></i></div>
+    <div style="flex:1; min-width:200px">
+      <div style="font-family:var(--ff-head); font-size:1.4rem; font-weight:700; margin-bottom:0.3rem;">TikTok <span style="color:#69C9D0">@frewon21</span></div>
+      <p style="color:var(--muted); font-size:0.92rem; margin:0">Short-form mathematics content, exam tips, problem-solving walkthroughs, and behind-the-scenes of academic life — making math viral one equation at a time.</p>
+    </div>
+    <a href="https://www.tiktok.com/@frewon21" target="_blank" class="btn btn-outline" style="--border:rgba(105,201,208,0.3); flex-shrink:0">
+      <i class="fab fa-tiktok"></i> Follow on TikTok
+    </a>
+  </div>
+
+  <div class="social-grid">
+    <a class="social-card" href="https://www.youtube.com/@GMS_21" target="_blank" style="--sc-color:#FF0000">
+      <div class="social-card-icon"><i class="fab fa-youtube"></i></div>
+      <div class="social-card-name">YouTube</div>
+      <div class="social-card-handle">@GMS_21</div>
+    </a>
+    <a class="social-card" href="https://www.tiktok.com/@frewon21" target="_blank" style="--sc-color:#69C9D0">
+      <div class="social-card-icon"><i class="fab fa-tiktok"></i></div>
+      <div class="social-card-name">TikTok</div>
+      <div class="social-card-handle">@frewon21</div>
+    </a>
+    <a class="social-card" href="https://orcid.org/0000-0002-1430-7367" target="_blank" style="--sc-color:#A6CE39">
+      <div class="social-card-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div class="social-card-name">ORCID</div>
+      <div class="social-card-handle">0000-0002-1430-7367</div>
+    </a>
+    <a class="social-card" href="mailto:gutademisu82991@gmail.com" style="--sc-color:#EA4335">
+      <div class="social-card-icon"><i class="fas fa-envelope"></i></div>
+      <div class="social-card-name">Email</div>
+      <div class="social-card-handle">gutademisu82991<br>@gmail.com</div>
+    </a>
+    <a class="social-card" href="#" style="--sc-color:#0A66C2">
+      <div class="social-card-icon"><i class="fab fa-linkedin-in"></i></div>
+      <div class="social-card-name">LinkedIn</div>
+      <div class="social-card-handle">Guta D. Kebede</div>
+    </a>
+    <a class="social-card" href="#" style="--sc-color:#26A5E4">
+      <div class="social-card-icon"><i class="fab fa-telegram-plane"></i></div>
+      <div class="social-card-name">Telegram</div>
+      <div class="social-card-handle">Connect</div>
+    </a>
+  </div>
+</section>
+
+<!-- ======================== ACHIEVEMENTS ======================== -->
+<section id="achievements">
+  <div class="section-tag">06 · Impact</div>
+  <h2 class="section-title">Achievements &amp; <span>Impact</span></h2>
+  <div class="divider"></div>
+  <p class="section-lead">Quantifying the academic footprint and educational influence built over years of dedicated work.</p>
+
+  <div class="achieve-grid">
+    <div class="achieve-card reveal">
+      <div class="achieve-icon"><i class="fas fa-file-alt"></i></div>
+      <div class="achieve-num"><span class="counter" data-target="5">0</span><span class="suffix">+</span></div>
+      <div class="achieve-label">Peer-Reviewed Publications in International Journals</div>
+    </div>
+    <div class="achieve-card reveal" style="transition-delay:0.08s">
+      <div class="achieve-icon"><i class="fas fa-users"></i></div>
+      <div class="achieve-num"><span class="counter" data-target="8">0</span><span class="suffix">+</span></div>
+      <div class="achieve-label">Research Collaborators Across Institutions</div>
+    </div>
+    <div class="achieve-card reveal" style="transition-delay:0.16s">
+      <div class="achieve-icon"><i class="fas fa-globe-africa"></i></div>
+      <div class="achieve-num"><span class="counter" data-target="4">0</span></div>
+      <div class="achieve-label">International Journals Published In</div>
+    </div>
+    <div class="achieve-card reveal" style="transition-delay:0.24s">
+      <div class="achieve-icon"><i class="fab fa-youtube"></i></div>
+      <div class="achieve-num"><span class="suffix">🎓</span></div>
+      <div class="achieve-label">YouTube Channel: Guta Maths Studio for STEM Education</div>
+    </div>
+    <div class="achieve-card reveal" style="transition-delay:0.32s">
+      <div class="achieve-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+      <div class="achieve-num"><span class="suffix">∞</span></div>
+      <div class="achieve-label">Students Reached Through University Teaching & Digital Content</div>
+    </div>
+    <div class="achieve-card reveal" style="transition-delay:0.4s">
+      <div class="achieve-icon"><i class="fas fa-university"></i></div>
+      <div class="achieve-num"><span class="suffix">🇪🇹</span></div>
+      <div class="achieve-label">Dilla University — Department of Mathematics, Ethiopia</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== MATH INTERACTIVE ======================== -->
+<section id="math" class="bg-alt">
+  <div class="section-tag">07 · Mathematics</div>
+  <h2 class="section-title">The Language of <span>the Universe</span></h2>
+  <div class="divider"></div>
+
+  <div class="math-showcase reveal">
+    <!-- background equations -->
+    <span class="bg-eq" style="top:5%;right:3%">∇²φ = ρ/ε₀</span>
+    <span class="bg-eq" style="top:25%;right:12%">e^(iπ) + 1 = 0</span>
+    <span class="bg-eq" style="bottom:15%;right:5%">∮ E·dA = Q/ε₀</span>
+    <span class="bg-eq" style="bottom:5%;left:30%">F = ma</span>
+
+    <div class="section-tag" style="margin-bottom:0.5rem">Core Research Domain</div>
+    <h3 style="font-family:var(--ff-head); font-size:1.6rem; font-weight:700; margin-bottom:0.8rem;">Singularly Perturbed Differential Equations</h3>
+    <p style="color:var(--muted); max-width:640px; margin-bottom:0; font-size:0.95rem;">These equations model phenomena where a small parameter multiplies the highest derivative — creating boundary layers and requiring specialized numerical methods. Guta's research advances parameter-uniform convergent schemes for these challenging problems.</p>
+
+    <div class="math-eq-grid">
+      <div class="math-eq-card">
+        <div class="eq-label">Two-Parameter Problem</div>
+        <div class="eq-display">ε·u''(x,t) − γ·u'(x,t) − u(x,t−τ) = f(x,t)</div>
+        <div class="eq-desc">Core equation type studied: parabolic PDE with two small parameters ε, γ and time delay τ.</div>
+      </div>
+      <div class="math-eq-card">
+        <div class="eq-label">Implicit Euler Scheme</div>
+        <div class="eq-display">U^(n+1) − U^n / Δt ≈ L_h[U^(n+1)]</div>
+        <div class="eq-desc">Time discretization approach used in published numerical schemes for stability.</div>
+      </div>
+      <div class="math-eq-card">
+        <div class="eq-label">B-Spline Collocation</div>
+        <div class="eq-display">u(x) ≈ ∑ cⱼ B³ⱼ(x)</div>
+        <div class="eq-desc">Third-degree B-spline basis functions for high-accuracy spatial discretization.</div>
+      </div>
+      <div class="math-eq-card">
+        <div class="eq-label">Parameter-Uniform Convergence</div>
+        <div class="eq-display">‖U − u‖ ≤ C · (Δt² + h²)</div>
+        <div class="eq-desc">Key convergence result: error bound independent of small perturbation parameters ε, γ.</div>
+      </div>
+      <div class="math-eq-card">
+        <div class="eq-label">Richardson Extrapolation</div>
+        <div class="eq-display">u*= (4U_{2h} − U_h) / 3</div>
+        <div class="eq-desc">Accuracy enhancement technique applied to boost convergence order.</div>
+      </div>
+      <div class="math-eq-card">
+        <div class="eq-label">Stability Condition</div>
+        <div class="eq-display">|λ(A_h)| ≤ 1 ∀ ε,γ ∈ (0,1]</div>
+        <div class="eq-desc">Parameter-independent spectral radius condition guaranteeing numerical stability.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== VISION ======================== -->
+<section id="vision">
+  <div class="section-tag">08 · Philosophy</div>
+  <h2 class="section-title">Vision &amp; <span>Philosophy</span></h2>
+  <div class="divider"></div>
+  <p class="section-lead">The principles and aspirations that drive every lecture, every paper, every video.</p>
+
+  <div class="vision-grid">
+    <div class="vision-card reveal">
+      <div class="vision-q">"</div>
+      <div class="vision-text">Mathematics is not a subject to be feared — it is a language to be learned. My goal is to make every student feel at home in the world of equations, proofs, and infinite possibility.</div>
+      <div class="vision-attr">— Guta Demisu Kebede · Teaching Philosophy</div>
+    </div>
+    <div class="vision-card reveal" style="transition-delay:0.1s">
+      <div class="vision-q">"</div>
+      <div class="vision-text">Research is meaningless if it stays locked in journals. True impact means translating mathematical discoveries into tools that serve humanity — from classrooms in Dilla to screens across the world.</div>
+      <div class="vision-attr">— Guta Demisu Kebede · Research Vision</div>
+    </div>
+    <div class="vision-card reveal" style="transition-delay:0.2s">
+      <div class="vision-q">"</div>
+      <div class="vision-text">Ethiopia has brilliant mathematical minds waiting to be unlocked. Digital education is not a luxury — it is the bridge between potential and achievement for an entire generation of STEM students.</div>
+      <div class="vision-attr">— Guta Demisu Kebede · Digital Education Mission</div>
+    </div>
+    <div class="vision-card reveal" style="transition-delay:0.3s">
+      <div class="vision-q">"</div>
+      <div class="vision-text">The most singularly perturbed system I know is a student who believes they cannot do mathematics. The right teaching method — applied patiently — can resolve even that boundary layer.</div>
+      <div class="vision-attr">— Guta Demisu Kebede · Student Empowerment</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CONTACT ======================== -->
+<section id="contact" class="bg-alt">
+  <div class="section-tag">09 · Contact</div>
+  <h2 class="section-title">Get in <span>Touch</span></h2>
+  <div class="divider"></div>
+  <p class="section-lead">Research collaborations, academic inquiries, media, or just a mathematical conversation — reach out.</p>
+
+  <div class="contact-grid">
+    <form class="contact-form reveal" onsubmit="handleForm(event)">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" type="text" placeholder="Your full name" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" placeholder="your@email.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <input class="form-input" type="text" placeholder="Research collaboration / Teaching / General" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-input" placeholder="Your message..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">
+        <i class="fas fa-paper-plane"></i> Send Message
+      </button>
+      <div id="form-msg" style="display:none; color:var(--teal); font-size:0.9rem; margin-top:0.5rem;"></div>
+    </form>
+
+    <div class="contact-info reveal" style="transition-delay:0.15s">
+      <div class="ci-item">
+        <div class="ci-icon"><i class="fas fa-university"></i></div>
+        <div>
+          <div class="ci-label">Institution</div>
+          <div class="ci-val">Department of Mathematics<br>College of Natural and Computational Sciences<br>Dilla University, Dilla, Ethiopia (P.O. Box 419)</div>
+        </div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-val"><a href="mailto:gutademisu82991@gmail.com" style="color:var(--teal)">gutademisu82991@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon"><i class="fas fa-id-badge"></i></div>
+        <div>
+          <div class="ci-label">ORCID</div>
+          <div class="ci-val"><a href="https://orcid.org/0000-0002-1430-7367" target="_blank" style="color:var(--teal)">0000-0002-1430-7367</a></div>
+        </div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon"><i class="fab fa-youtube"></i></div>
+        <div>
+          <div class="ci-label">YouTube</div>
+          <div class="ci-val"><a href="https://www.youtube.com/@GMS_21" target="_blank" style="color:var(--teal)">Guta Maths Studio (@GMS_21)</a></div>
+        </div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon"><i class="fab fa-tiktok"></i></div>
+        <div>
+          <div class="ci-label">TikTok</div>
+          <div class="ci-val"><a href="https://www.tiktok.com/@frewon21" target="_blank" style="color:var(--teal)">@frewon21</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer>
+  <div class="footer-brand">Guta Demisu Kebede</div>
+  <div class="footer-copy">© 2025 · Mathematician · Researcher · Educator · Dilla University, Ethiopia</div>
+  <div class="footer-socials">
+    <a class="footer-social" href="https://www.youtube.com/@GMS_21" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a class="footer-social" href="https://www.tiktok.com/@frewon21" target="_blank"><i class="fab fa-tiktok"></i></a>
+    <a class="footer-social" href="https://orcid.org/0000-0002-1430-7367" target="_blank"><i class="fas fa-graduation-cap"></i></a>
+    <a class="footer-social" href="mailto:gutademisu82991@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+</footer>
+
+<button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ======================== JAVASCRIPT ======================== -->
+<script>
+/* ---- Loader ---- */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 1700);
+});
+
+/* ---- Nav scroll ---- */
+const nav = document.getElementById('nav');
+const backTop = document.getElementById('back-top');
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 60);
+  backTop.classList.toggle('show', y > 400);
+
+  // Active nav
+  let cur = '';
+  sections.forEach(s => { if (y >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+});
+
+/* ---- Hamburger ---- */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('.mob-link').forEach(l => {
+  l.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
+
+/* ---- Float symbols ---- */
+const symbols = ['∫','∑','∂','∞','π','√','∈','∀','∃','≈','Δ','λ','ε','γ','∇','∮','α','β','θ'];
+const container = document.getElementById('floatSymbols');
+symbols.forEach((s, i) => {
+  const el = document.createElement('div');
+  el.className = 'fs';
+  el.textContent = s;
+  el.style.cssText = `left:${5 + Math.random()*90}%;bottom:${-5 + Math.random()*30}%;--dur:${10+Math.random()*14}s;--delay:${Math.random()*10}s;font-size:${0.8+Math.random()*1.2}rem;`;
+  container.appendChild(el);
+});
+
+/* ---- Typed effect ---- */
+const phrases = [
+  'Mathematics Researcher',
+  'University Lecturer',
+  'Numerical Analyst',
+  'Digital STEM Educator',
+  'Educational Content Creator',
+  'Problem Solver'
+];
+let pi = 0, ci = 0, del = false;
+const typedEl = document.getElementById('typed');
+function type() {
+  const cur = phrases[pi];
+  typedEl.textContent = del ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+  if (!del && ci === cur.length) { setTimeout(() => del = true, 1800); }
+  else if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+  setTimeout(type, del ? 60 : 95);
+}
+type();
+
+/* ---- Scroll reveal ---- */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // skill bars
+      e.target.classList.add('visible'); // triggers CSS
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+/* ---- Counters ---- */
+function animateCounter(el, target, start, duration) {
+  let startTime = null;
+  const step = (timestamp) => {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const val = Math.floor(progress * (target - start) + start);
+    el.textContent = val;
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  };
+  requestAnimationFrame(step);
+}
+
+// stat-num counters
+const statNums = document.querySelectorAll('.stat-num[data-target]');
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const target = +e.target.dataset.target;
+      const start = +e.target.dataset.start || 0;
+      animateCounter(e.target, target, start, 1200);
+      statObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+statNums.forEach(el => statObserver.observe(el));
+
+// achieve counters
+const counters = document.querySelectorAll('.counter');
+const cObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCounter(e.target, +e.target.dataset.target, 0, 1400);
+      cObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => cObserver.observe(el));
+
+/* ---- Contact form ---- */
+function handleForm(e) {
+  e.preventDefault();
+  const msg = document.getElementById('form-msg');
+  msg.style.display = 'block';
+  msg.textContent = '✓ Thank you! Your message has been received. Guta will respond soon.';
+  e.target.reset();
+}
+</script>
+</body>
+</html>
